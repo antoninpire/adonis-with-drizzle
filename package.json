@@ -11,9 +11,7 @@
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "migrate": "drizzle-kit generate --config=./config/database.ts",
-    "migrate2": "npx drizzle-kit push --config=./config/database.ts"
+    "typecheck": "tsc --noEmit"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
