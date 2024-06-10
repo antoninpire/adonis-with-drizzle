@@ -15,6 +15,7 @@
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
+    "#core/*": "./app/core/*.js",
     "#exceptions/*": "./app/exceptions/*.js",
     "#models/*": "./app/models/*.js",
     "#mails/*": "./app/mails/*.js",
@@ -57,14 +58,17 @@
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^20.6.0",
     "@adonisjs/session": "^7.4.1",
+    "@anatine/zod-openapi": "^2.2.5",
     "@libsql/client": "^0.6.2",
     "@paralleldrive/cuid2": "^2.2.2",
-    "@vinejs/vine": "^2.0.0",
-    "adonis-autoswagger": "^3.43.0",
+    "@ts-rest/core": "^3.45.2",
+    "@ts-rest/open-api": "^3.45.2",
     "better-sqlite3": "^11.0.0",
     "drizzle-orm": "^0.31.2",
+    "edge.js": "^6.0.2",
     "luxon": "^3.4.4",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "zod": "^3.23.8"
   },
   "hotHook": {
     "boundaries": [

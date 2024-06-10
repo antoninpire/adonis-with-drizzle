@@ -1,37 +1,26 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
+import { contract, openApiDocument } from '#core/contract'
+import app from '@adonisjs/core/services/app'
 import router from '@adonisjs/core/services/router'
+const AuthController = () => import('#controllers/auth_controller')
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    health: 'ok',
   }
 })
 
-const AuthController = () => import('#controllers/auth_controller')
-router
-  .group(() => {
-    router.post('/login', [AuthController, 'login'])
-  })
-  .prefix('/auth')
-
-import swagger from '#config/swagger'
-import AutoSwagger from 'adonis-autoswagger'
-// returns swagger in YAML
-router.get('/swagger', async () => {
-  return AutoSwagger.default.docs(router.toJSON(), swagger)
+router.group(() => {
+  router.post('/login', [AuthController, 'login'])
+  router.get(contract.getUser.path, [AuthController, 'getUser'])
+  router.post(contract.updateUser.path, [AuthController, 'updateUser'])
 })
+// .prefix('/auth')
 
-// Renders Swagger-UI and passes YAML-output of /swagger
-router.get('/docs', async () => {
-  return AutoSwagger.default.ui('/swagger', swagger)
-  // return AutoSwagger.default.scalar("/swagger", swagger); to use Scalar instead
-  // return AutoSwagger.default.rapidoc("/swagger", swagger); to use RapiDoc instead
+router.get('/docs', async ({ view }) => {
+  return view.render('docs', {
+    url: app.inProduction ? 'https://melf.app/' : 'http://localhost:3333/',
+  })
+})
+router.get('/openapi.json', async () => {
+  return openApiDocument
 })
